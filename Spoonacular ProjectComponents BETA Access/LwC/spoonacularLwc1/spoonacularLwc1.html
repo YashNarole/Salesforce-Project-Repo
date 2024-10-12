@@ -1,0 +1,60 @@
+<template>
+    <lightning-card title="Salesforce x Spoonacular System (BETA VERSION)" class="slds-theme_shade slds-theme_alert-texture" icon-name="action:new_group">
+    <div class="slds-grid slds-gutters ">
+     <div class="slds-col" >
+    <lightning-card title="Spoonacular Food Dish Engine" icon-name="custom:custom51" class="slds-theme_shade;" >
+        <div class="slds-box slds-p-horizontal_xx-small" style="min-height: 100px;">
+            <lightning-input  type="text" label="Search Reciepe by Ingredient:" placeholder="eg. Apple" onchange={updateId}></lightning-input>
+            <br>
+            <button class="slds-button slds-button_success" onclick={handleIngredient}>Get Reciepe</button>
+            <br>
+        </div>
+    </lightning-card>   
+        </div>
+     <div class="slds-col">
+    <template if:true={fetchReciepe}>
+        <div class="slds-box slds-p-horizontal_xx-small">
+            <div class="slds-grid slds-gutters">
+                <div class="slds-col">
+                  <span><lightning-card title={reciepeName} icon-name="utility:food_and_drink">
+                    <br>
+                    <img src={imgURL} class="slds-box slds-align_absolute-center" height="500px" width="500px"></img> 
+                    <br>
+                    <p style="color: green;"><b>  Food ID:</b> </p> {summary1}
+                    <!-- <lightning-textarea  id="textarea-id-01" value={summary} class="slds-textarea slds-box slds-align_absolute-center" disabled="true"></lightning-textarea>      -->
+                </lightning-card>
+                </span>
+                </div>
+                <div class="slds-col">
+                  <span>
+                <lightning-card title={reciepeName2} icon-name="utility:food_and_drink">
+                    <br>
+                    <img src={imgURL2} class="slds-box slds-align_absolute-center" height="500px" width="500px"></img> 
+                    <br>
+                    <p style="color: green;"><b> Food ID:</b> </p> {summary2}
+                    <!-- <lightning-textarea  id="textarea-id-01" value={summary} class="slds-textarea slds-box slds-align_absolute-center" disabled="true"></lightning-textarea>      -->
+                </lightning-card>
+                </span>
+                </div>
+                <div class="slds-col">
+                  <span>
+                    <lightning-card title={reciepeName3} icon-name="utility:food_and_drink">
+                        <br>
+                        <img src={imgURL3} class="slds-box slds-align_absolute-center" height="500px" width="500px"></img> 
+                        <br>
+                        <p style="color: green;"><b>Food ID:</b> </p>{summary3}
+                        <!-- <lightning-textarea  id="textarea-id-01" value={summary} class="slds-textarea slds-box slds-align_absolute-center" disabled="true"></lightning-textarea>      -->
+                    </lightning-card>
+                  </span>
+                </div>
+              </div>
+            
+        </div>
+    </template>
+    <template if:true={noMatch}>
+        <p style="color: red;"> <b>NO MATCH FOUND</b> </p>
+    </template>
+    </div>
+</div>     
+</lightning-card>
+</template>
