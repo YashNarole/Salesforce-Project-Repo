@@ -1,0 +1,72 @@
+<template>
+    <lightning-card icon-name="action:freeze_user" title="Weather Forecast API">
+        <div>
+            <div class="slds-m-around_medium slds-align_absolute-center">
+                 <img src={appLogo} alt="AppLogo" width="75" height="75">
+            </div>  
+            <div class="slds-m-around_medium slds-align_absolute-center">
+                 <img src={createdBy} alt="createdBy" width="100" height="100">
+            </div>
+            <article class="slds-card slds-align_absolute-center">
+                
+                <div class="slds-box slds-box_x-small slds-text-align_center slds-m-around_x-small">
+                    <div class="slds-align_absolute-center">
+                        <lightning-input type="text" label="Enter the City Name" onchange={cityN}
+                        message-when-too-long="City Name must not be more than 20 characters." class="" placeholder="eg. Delhi, Mumbai, Pune">
+                        </lightning-input>
+                        
+                    </div>
+                    <br>
+                    <lightning-input label="Toggle AQI" name="aqiCheckk" type="toggle" message-toggle-active="Show AQI" message-toggle-inactive="Hide AQI" onchange={handleToggle}> </lightning-input>
+                    <br>
+                    <lightning-button label="Get Weather Details" onclick={getWeatherDe} ></lightning-button>
+                </div>
+            </article>
+        </div>
+        <template if:true={weatherSuccess}>
+            <lightning-card>
+                <p style="font-size: larger;" class="slds-align_absolute-center"><b>{cityTitle}</b></p>
+            <div class="slds-align_absolute-center">
+            <img src={climateImg} alt="WeatherImage" width="50" height="50">
+            <p style="color: blue;"><b>{climateName}</b></p>
+            </div>
+            <div class="slds-grid slds-gutters slds-align_absolute-center">
+                <span style="margin-right: 10px;">
+                    <div>
+                    <lightning-input type="text" label="City:"  disabled value={areaCity}></lightning-input>
+                    <lightning-input type="text" label="State:"   disabled value={areaRegion}></lightning-input>
+                    <lightning-input type="text" label="Country:"  disabled value={areaCountry}></lightning-input>
+                    <lightning-input type="text" label="Time-Zone:"  disabled value={timeZone}></lightning-input>
+                    </div>
+                </span>
+                <span style="margin-left: 10px;">
+                    <div>
+                    <lightning-input type="text" label="Temperature:"  disabled value={tempInCelcius}></lightning-input>
+                    <lightning-input type="text" label="Humidity:" disabled value={humid}></lightning-input>
+                    <lightning-input type="text" label="Wind Direction: " disabled value={windDir}></lightning-input>
+                    <lightning-input type="text" label="Wind Speed:" disabled value={windSpeed}></lightning-input>
+                    </div>
+                </span>
+                <span style="margin-left: 10px;">
+                    <template if:true={aqiCheck}>
+                        <div class="slds-align_absolute-center slds-border_right slds-border_bottom slds-border_left slds-border_top" style="border: 50px;border-color:rgb(16, 0, 160); ">
+                            <span>
+                            <lightning-input type="text" label="Carbon Monoxide:"  disabled value={co2} style="margin-right: 10px;"></lightning-input>
+                            <lightning-input type="text" label="O3:" disabled value={o3} style="margin-right: 10px;"></lightning-input>
+                            <lightning-input type="text" label="Sulfur Dioxide:" disabled value={so2} style="margin-right: 10px;"></lightning-input>
+                            <lightning-input type="text" label="Nitrous Oxide:" disabled value={no2} style="margin-right: 10px;"></lightning-input>
+                            </span>
+                        </div>
+                    </template>
+                </span>
+            </div>
+            
+        </lightning-card>
+        </template>
+        <template if:true={weatherFail}>
+            <div class="slds-align_absolute-center">
+            <p style="color:brown"><b>{errorCatcher}</b></p>
+            </div>
+        </template>
+    </lightning-card>
+</template>
